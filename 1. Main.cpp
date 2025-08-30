@@ -25,4 +25,5 @@ void scoreMenu() {
         break;
     }
     cout << "Hello world";
+    cout << "Tra smos";
 }
