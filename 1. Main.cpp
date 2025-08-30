@@ -24,4 +24,5 @@ void scoreMenu() {
     default:
         break;
     }
+    cout << "Hello world";
 }
