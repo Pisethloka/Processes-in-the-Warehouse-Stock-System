@@ -26,6 +26,5 @@ void scoreMenu() {
     }
     cout << "Hello world";
     cout << "Tra smos";
-    nfdklsanl
     
 }
