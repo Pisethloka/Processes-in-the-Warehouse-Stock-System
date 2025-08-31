@@ -77,3 +77,97 @@ void itemInfoMenu() {
         break;
     }
 }
+void UpdateItemInfo()
+{
+    fstream fin("ItemInfo.csv");
+    ofstream fout("ItemInfo_new.csv");
+
+    int idnum, id2, count = 0;
+    string new_qty, new_price;
+    string line, word;
+    vector<string> row;
+
+    cout << "Enter Item ID to update: ";
+    cin >> idnum;
+    cin.ignore(); // Clear newline left in input buffer
+    cout << "Enter new quantity: ";
+    getline(cin, new_qty);
+    cout << "Enter new price: ";
+    getline(cin, new_price);
+
+    while (getline(fin, line)) {
+        row.clear();
+        stringstream s(line);
+        while (getline(s, word, ',')) {
+            row.push_back(word);
+        }
+
+        id2 = stoi(row[0]);
+        int row_size = row.size();
+        if (id2 == idnum) {
+            count = 1;
+            row[2] = new_qty;
+            row[3] = new_price;
+        }
+
+        for (int i = 0; i < row_size - 1; i++) {
+            fout << row[i] << ",";
+        }
+        fout << row[row_size - 1] << "\n";
+    }
+
+    if (count == 0)
+        cout << "Update not successful.\n";
+
+    fin.close();
+    fout.close();
+
+    remove("ItemInfo.csv");
+    rename("ItemInfo_new.csv", "ItemInfo.csv");
+};
+void DeleteItemInfo() {
+    ifstream fin("ItemInfo.csv");
+    ofstream fout("ItemInfo_new.csv");
+
+    int idnum, id2, count = 0;
+    string line;
+    vector<string> row;
+
+    cout << "Enter the ID of item to be deleted: ";
+    cin >> idnum;
+
+    while (getline(fin, line)) {
+        row.clear();
+        stringstream s(line);
+        string word;
+
+        while (getline(s, word, ',')) {
+            row.push_back(word);
+        }
+
+        id2 = stoi(row[0]);
+
+        if (id2 != idnum) {
+            for (size_t i = 0; i < row.size() - 1; i++) {
+                fout << row[i] << ",";
+            }
+            fout << row.back() << "\n";
+        } else {
+            count = 1;
+        }
+    }
+
+    if (count == 1) {
+        cout << "Item Deleted\n";
+    } else {
+        cout << "Item not found\n";
+    }
+
+    fin.close();
+    fout.close();
+
+    remove("ItemInfo.csv");
+    rename("ItemInfo_new.csv", "ItemInfo.csv");
+};
+
+
