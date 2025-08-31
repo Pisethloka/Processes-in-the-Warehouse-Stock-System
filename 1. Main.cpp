@@ -1,154 +1,30 @@
-#include <iostream>
-#include <vector>
-#include <string>
+#include<iostream>
+#include<fstream>
+#include<sstream>
+#include<vector>
 using namespace std;
 
-//  Stock Structure 
-struct Stock {
-    int id;
-    string name;
-    int quantity;
-};
+void scoreMenu();
+void itemInfoMenu;
 
-// Global vector to store stock records
-vector<Stock> stockList;
-
-//  Function Declarations 
-void stockMenu();
-void createStock();
-void searchStock();
-void updateStock();
-void deleteStock();
-
-// Main Function 
-int main() {
+void scoreMenu() {
     int choice;
+    cout <<"1. Create Stock records" <<endl;
+    cout <<"2. Search Stock detail by ID: "<<endl;
+    cout <<"3. Update Stock for quantities (for incoming and outgoing stocks): "<<endl;
+    cout <<"4. Delete Stock record "<<endl;
+    cout <<"5. Exit"<<endl;
+    
+    cout <<"Enter your choice: "; cin>>choice;
 
-    do {
-        cout << "\n Warehouse Stock Tracking System \n";
-        cout << "1. Stock Management\n";
-        cout << "2. Item Information Management (here your work bro)\n";
-        cout << "3. Exit\n";
-        cout << "\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch(choice) {
-            case 1:
-                stockMenu(); // goes to stock management menu
-                break;
-            case 2:
-                cout << "Item Information Management is handled by your dear bro.\n";
-                break;
-            case 3:
-                cout << "Exiting program... Goodbye!\n";
-                break;
-            default:
-                cout << "Invalid choice! Please try again.\n";
-        }
-    } while(choice != 3);
-
-    return 0;
-}
-
-//  Stock Management Menu 
-void stockMenu() {
-    int choice;
-    do {
-        cout << "\nStock Management Menu n";
-        cout << "1. Create Stock Record\n";
-        cout << "2. Search Stock by ID\n";
-        cout << "3. Update Stock Quantity\n";
-        cout << "4. Delete Stock Record\n";
-        cout << "5. Exit to Main Menu\n";
-        cout << "\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-
-        switch(choice) {
-            case 1:
-                createStock();
-                break;
-            case 2:
-                searchStock();
-                break;
-            case 3:
-                updateStock();
-                break;
-            case 4:
-                deleteStock();
-                break;
-            case 5:
-                cout << "Returning to Main Menu...\n";
-                break;
-            default:
-                cout << "Invalid choice! Try again.\n";
-        }
-    } while(choice != 5);
-}
-
-// Create Stock Record 
-void createStock() {
-    Stock s;
-    cout << "Enter Stock ID: ";
-    cin >> s.id;
-    cout << "Enter Stock Name: ";
-    cin.ignore();
-    getline(cin, s.name);
-    cout << "Enter Quantity: ";
-    cin >> s.quantity;
-
-    stockList.push_back(s);
-    cout << "Stock record added successfully!\n";
-}
-
-//  Search Stock by ID 
-void searchStock() {
-    int id;
-    cout << "Enter Stock ID to search: ";
-    cin >> id;
-
-    for(auto &s : stockList) {
-        if(s.id == id) {
-            cout << "Stock Found!\n";
-            cout << "ID: " << s.id << " | Name: " << s.name << " | Quantity: " << s.quantity << endl;
-            return;
-        }
+    switch (choice) {
+    case 1:
+        break;
+    
+    default:
+        break;
     }
-    cout << "Stock with ID " << id << " not found.\n";
-}
-
-// Update Stock Quantity 
-void updateStock() {
-    int id, change;
-    cout << "Enter Stock ID to update: ";
-    cin >> id;
-
-    for(auto &s : stockList) {
-        if(s.id == id) {
-            cout << "Enter quantity change (+ for incoming, - for outgoing): ";
-            cin >> change;
-            s.quantity += change;
-            cout << "Stock updated successfully! New quantity: " << s.quantity << endl;
-            return;
-        }
-    }
-    cout << "Stock with ID " << id << " not found.\n";
-}
-
-//  Delete Stock Record
-
-void deleteStock() {
-    int id;
-    cout << "Enter Stock ID to delete: ";
-    cin >> id;
-
-    for(size_t i = 0; i < stockList.size(); i++) {
-        if(stockList[i].id == id) {
-            stockList.erase(stockList.begin() + i);
-            cout << "Stock record deleted successfully!\n";
-            return;
-        }
-    }
-    cout << "Stock with ID " << id << " not found.\n";
+    cout << "Hello world";
+    cout << "Tra smos";
+    
 }
