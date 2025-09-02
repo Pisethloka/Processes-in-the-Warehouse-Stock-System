@@ -247,3 +247,71 @@ void DeleteItemInfo() {
     remove("ItemInfo.csv");
     rename("ItemInfo_new.csv", "ItemInfo.csv");
 };
+
+void CreateItemInfo() {
+    ofstream fout("ItemInfo.csv", ios::app);
+    int id;
+    string name, category, supplier, price;
+
+    cout << "Enter Item ID: ";
+    cin >> id;
+    cin.ignore();
+    
+
+    cout << "Enter Item Name: ";
+    getline(cin, name);
+
+    cout << "Enter Item Category";
+    getline(cin, category);
+
+    cout << "Enter Supplier Name: ";
+    getline(cin, supplier);
+
+    cout << "Enter Price: ";
+    getline(cin, price);
+
+    fout << id << "," << name << "," << category << "," << supplier << "," << price << "\n";
+    fout.close();
+
+    cout << "Item Record created successfully!\n";
+};
+
+void SearchItemInfo() {
+    ifstream fin("ItemInfo.csv");
+
+    int idnum, id2, found = 0;
+    string line, word;
+    vector<string> row;
+
+    cout << "Enter Item ID to search: ";
+    cin >> idnum;
+
+    while (getline(fin, line)) {
+        row.clear();
+        stringstream s(line);
+
+        while (getline(s, word, ',')) {
+            row.push_back(word);
+        }
+
+        id2 = stoi(row[0]);
+
+        if (id2 == idnum) {
+            found = 1;
+            cout << "\nItem Found!\n";
+            cout << "ID: "<< row[0] << "\n";
+            cout << "Name: "<< row[1] << "\n";
+            cout << "Category: "<< row[2] << "\n";
+            cout << "Supplier: "<< row[3] << "\n";
+            cout << "Price: "<< row[4] << "\n";
+            break;
+        }
+    }
+
+    if (!found) {
+        cout << "Item with ID " << idnum << "not found.\n";
+    }
+
+    fin.close();
+
+};
